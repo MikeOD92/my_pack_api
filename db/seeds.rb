@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Pack.create([
+    { name: 'Mikes pack'}
+])
+
+Catagory.create([
+    { name: 'sleep & shelter', pack_id: 1}, 
+    { name: 'navagation & electric', pack_id: 1},
+    { name: 'clothing', pack_id: 1},
+    { name: 'kitchen & water', pack_id: 1},
+    { name: 'repair', pack_id: 1},
+])
+
+Item.create([
+    { name: 'Feathered Friends Hummingbird 20', dis: 'down sleeping bags', weight: 24, catagory_id: 1},
+    { name: 'Tarptent Protrail', dis: 'single wall 1P tent, not free standing', weight: 26, catagory_id: 1},
+    { name: 'z-lite', dis: 'foam sleeping pad cut down, six panels', weight: 6, catagory_id: 1},
+    { name: 'garmin in-reach', dis: 'gps & emergeny communication', weight: 10, catagory_id: 2},
+    { name: 'zipka head lamp', dis: 'petzl zip string head band', weight: 2, catagory_id: 2},
+    { name: 'compass', dis: 'suunto-MC-2G sight compass with mirror', weight: 2, catagory_id: 2},
+    { name: 'long sleeve nylon sun button up shirt', dis: 'keep the sun off your arms still be breathy', weight: 8, catagory_id: 3},
+
+])
