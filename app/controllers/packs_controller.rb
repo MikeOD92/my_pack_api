@@ -4,13 +4,15 @@ class PacksController < ApplicationController
   # GET /packs
   def index
     @packs = Pack.all
+    # @catagories = Catagory.all
+    # @item = Item.all
 
     render json: @packs
   end
 
   # GET /packs/1
   def show
-    render json: @pack
+    render json: @pack.to_json(include: [:catagories => {include: :items}] )
   end
 
   # POST /packs

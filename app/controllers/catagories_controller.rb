@@ -10,7 +10,7 @@ class CatagoriesController < ApplicationController
 
   # GET /catagories/1
   def show
-    render json: @catagory
+    render json: @catagory.to_json(include: :items)
   end
 
   # POST /catagories
