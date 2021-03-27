@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_233548) do
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "dis"
-    t.integer "weight"
+    t.float "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "catagory_id"
