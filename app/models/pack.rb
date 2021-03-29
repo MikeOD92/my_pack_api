@@ -1,4 +1,3 @@
 class Pack < ApplicationRecord
-    has_many :catagories
-    has_many :items
+    has_many :catagories , dependent: :destroy
 end

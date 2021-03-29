@@ -1,9 +1,11 @@
 class CatagoriesController < ApplicationController
-  before_action :set_catagory, only: [:show, :update, :destroy]
 
+  before_action :get_pack
+  before_action :set_catagory, only: [:show, :update, :destroy]
+  
   # GET /catagories
   def index
-    @catagories = Catagory.all
+    @catagories = @pack.catagories
 
     render json: @catagories
   end
@@ -15,7 +17,7 @@ class CatagoriesController < ApplicationController
 
   # POST /catagories
   def create
-    @catagory = Catagory.new(catagory_params)
+    @catagory = @pack.catagories.build(catagory_params)
 
     if @catagory.save
       render json: @catagory, status: :created, location: @catagory
@@ -41,7 +43,11 @@ class CatagoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_catagory
-      @catagory = Catagory.find(params[:id])
+      @catagory = @pack.catagories.find(params[:id])
+    end
+
+    def get_pack
+      @pack = Packs.find(params[:pack_id])
     end
 
     # Only allow a list of trusted parameters through.
