@@ -20,7 +20,7 @@ class CatagoriesController < ApplicationController
     @catagory = @pack.catagories.build(catagory_params)
 
     if @catagory.save
-      render json: @catagory, status: :created, location: @catagory
+      render json: @pack.catagories
     else
       render json: @catagory.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class CatagoriesController < ApplicationController
   # PATCH/PUT /catagories/1
   def update
     if @catagory.update(catagory_params)
-      render json: @catagory
+      render json: @pack.catagories
     else
       render json: @catagory.errors, status: :unprocessable_entity
     end
@@ -42,14 +42,14 @@ class CatagoriesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+   
+    def get_pack
+      @pack = Pack.find(params[:pack_id])
+    end
+
     def set_catagory
       @catagory = @pack.catagories.find(params[:id])
     end
-
-    def get_pack
-      @pack = Packs.find(params[:pack_id])
-    end
-
     # Only allow a list of trusted parameters through.
     def catagory_params
       params.require(:catagory).permit(:name)
