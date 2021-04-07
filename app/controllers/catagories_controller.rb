@@ -20,7 +20,7 @@ class CatagoriesController < ApplicationController
     @catagory = @pack.catagories.build(catagory_params)
 
     if @catagory.save
-      render json: @pack.catagories
+      render json: @pack.to_json(include: [:catagories => {include: :items}] )
     else
       render json: @catagory.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class CatagoriesController < ApplicationController
   # PATCH/PUT /catagories/1
   def update
     if @catagory.update(catagory_params)
-      render json: @pack.catagories
+      render json: @pack.to_json(include: [:catagories => {include: :items}] )
     else
       render json: @catagory.errors, status: :unprocessable_entity
     end
@@ -37,8 +37,12 @@ class CatagoriesController < ApplicationController
 
   # DELETE /catagories/1
   def destroy
-    @catagory.destroy
-  end
+    if @catagory.destroy
+      render json: @pack.to_json(include: [:catagories => {include: :items}] )
+    else
+      render json: @catagory.errors, status: :unprocessable_entity
+      end
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

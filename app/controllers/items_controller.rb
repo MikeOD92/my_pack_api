@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :get_catagory
+  before_action :get_pack
   before_action :set_item, only: [:show, :update, :destroy]
   # GET /items
   def index
@@ -28,6 +29,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       render json: @catagory.items
+      # render json: @pack.to_json(include: [:catagories => {include: :items}] )
     else
       render json: @item.errors, status: :unprocessable_entity
     end
@@ -35,7 +37,12 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   def destroy
-    @item.destroy
+    if @item.destroy
+      render json: @catagory.items
+      # render json: @pack.to_json(include: [:catagories => {include: :items}] )
+    else 
+      render json: @item.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -44,6 +51,10 @@ class ItemsController < ApplicationController
       @catagory = Catagory.find(params[:catagory_id])
     end
     
+    def get_pack
+      @pack = Pack.find(params[:pack_id])
+    end
+
     def set_item
       @item = @catagory.items.find(params[:id])
     end
