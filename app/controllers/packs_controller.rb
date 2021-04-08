@@ -38,7 +38,7 @@ class PacksController < ApplicationController
   # DELETE /packs/1
   def destroy
     if @pack.destroy
-      render json: @packs
+      render json: Pack.all
     else
       render json: @item.errors, status: :unprocessable_entity
     end
